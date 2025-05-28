@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>实时路况图层</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script src="https://webapi.amap.com/maps?v=2.0&key=ffe9cdf51de8f2fea67d01ac065e3970"></script>
+<script>
+    var map = new AMap.Map('container', {
+        center: [114.08712, 22.55377],
+        zoom: 12.8,
+        features:[]
+    });
+
+    //实时路况图层
+    var trafficLayer = new AMap.TileLayer.Traffic({
+        zIndex: 10,
+        zooms: [7, 22],
+    });
+
+    trafficLayer.setMap(map);
+
+    var isVisible = true;
+    function toggle() {
+        if (isVisible) {
+            trafficLayer.hide();
+            isVisible = false;
+        } else {
+            trafficLayer.show();
+            isVisible = true;
+        }
+    }
+  	
+  	document.getElementById('btn').addEventListener('click', toggle);
+</script>
+</body>
+</html>
